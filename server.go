@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"path/filepath"
+	//"path/filepath"
 
 	"github.com/urfave/cli/v2"
 )
@@ -98,10 +98,11 @@ func fileServerC(fs http.FileSystem) http.Handler {
 
 func Start() {
 	fmt.Printf("Server is started at port:%v\n", Opts.Port)
-	fmt.Printf("Open 127.0.0.1:%v\n", Opts.Port)
+	fmt.Printf("Open 127.0.0.1:%v or localhost:%v\n", Opts.Port, Opts.Port)
 	fmt.Println("Press Ctrl+C to terminate")
 	
-	fp, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	fp, _ := os.Getwd()
+	fmt.Println("Working Dir: "+fp)
 	http.Handle("/", fileServerC(http.Dir(fp)))
 	serv := fmt.Sprintf(":%v", Opts.Port)
     fmt.Print(http.ListenAndServe(serv, nil))
