@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-	//"path/filepath"
 
 	"github.com/urfave/cli/v2"
 )
